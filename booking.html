@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Session — Old City Photo Co. | Knoxville, TN</title>
+<meta name="description" content="Request a photography session with Old City Photo Co. Real estate and commercial photography in Knoxville, TN.">
+<link rel="icon" type="image/svg+xml" href="oldcityphotoco-logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #B8965A;
+    --gold-light: #D4B07A;
+    --dark: #0E0E0C;
+    --dark-2: #1A1A17;
+    --dark-3: #252520;
+    --text: #F0EDE6;
+    --text-muted: #9E9B92;
+    --text-dim: #6A6860;
+    --rule: rgba(184,150,90,0.25);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--dark); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; font-weight: 300; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(14,14,12,0.92); backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .nav-logo { text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+  nav ul a { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  nav ul a:hover { color: var(--gold); }
+  .nav-cta { color: var(--gold) !important; border: 0.5px solid var(--gold); padding: 0.5rem 1.25rem; border-radius: 2px; }
+
+  .page-wrap { max-width: 860px; margin: 0 auto; padding: 8rem 2rem 6rem; }
+
+  .page-eyebrow { font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .page-eyebrow::before { content: ''; display: block; width: 40px; height: 0.5px; background: var(--gold); }
+  h1.page-title { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.1; margin-bottom: 0.75rem; }
+  h1.page-title em { font-style: italic; color: var(--gold-light); }
+  .page-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 3rem; max-width: 520px; }
+
+  /* STEPS */
+  .steps { display: flex; gap: 0; margin-bottom: 3rem; border-bottom: 0.5px solid var(--rule); }
+  .step { padding: 0.75rem 1.5rem; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); border-bottom: 2px solid transparent; margin-bottom: -0.5px; display: flex; align-items: center; gap: 0.5rem; }
+  .step.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .step.done { color: var(--text-muted); }
+  .step-num { width: 18px; height: 18px; border-radius: 50%; border: 0.5px solid currentColor; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; flex-shrink: 0; }
+  .step.done .step-num { background: var(--gold); border-color: var(--gold); color: var(--dark); }
+
+  /* PANELS */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* TYPE SELECTION */
+  .type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 0.5px solid var(--rule); margin-bottom: 2rem; }
+  .type-card { background: var(--dark); padding: 1.75rem; cursor: pointer; transition: background 0.2s; border: 2px solid transparent; }
+  .type-card:hover { background: var(--dark-2); }
+  .type-card.selected { background: var(--dark-3); border-color: var(--gold); }
+  .type-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; margin-bottom: 0.4rem; }
+  .type-price { font-size: 0.8rem; color: var(--gold); margin-bottom: 0.5rem; letter-spacing: 0.06em; }
+  .type-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; }
+
+  /* PACKAGE SELECTION */
+  .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 0.5px solid var(--rule); margin-bottom: 2rem; }
+  .package-card { background: var(--dark); padding: 1.5rem; cursor: pointer; transition: background 0.2s; border: 2px solid transparent; }
+  .package-card:hover { background: var(--dark-2); }
+  .package-card.selected { background: var(--dark-3); border-color: var(--gold); }
+  .package-card.featured-pkg { background: var(--dark-2); }
+  .pkg-tier { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .pkg-price { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: var(--text); line-height: 1; margin-bottom: 0.25rem; }
+  .pkg-price sup { font-size: 0.9rem; color: var(--gold); vertical-align: super; }
+  .pkg-desc { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .pkg-features { list-style: none; font-size: 0.75rem; color: var(--text-muted); }
+  .pkg-features li { padding: 0.2rem 0; display: flex; gap: 0.5rem; align-items: flex-start; }
+  .pkg-features li::before { content: '✦'; color: var(--gold); font-size: 0.55rem; margin-top: 0.3rem; flex-shrink: 0; }
+
+  /* CALENDAR */
+  .calendar-wrap { background: var(--dark-2); border: 0.5px solid var(--rule); padding: 1.5rem; margin-bottom: 2rem; }
+  .cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+  .cal-month { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; }
+  .cal-nav { background: none; border: 0.5px solid var(--rule); color: var(--text-muted); width: 32px; height: 32px; cursor: pointer; border-radius: 2px; font-size: 1rem; transition: border-color 0.2s, color 0.2s; }
+  .cal-nav:hover { border-color: var(--gold); color: var(--gold); }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-day-name { text-align: center; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); padding: 0.4rem 0; }
+  .cal-day { text-align: center; padding: 0.5rem; font-size: 0.85rem; border-radius: 2px; cursor: pointer; border: 0.5px solid transparent; transition: all 0.15s; color: var(--text-muted); }
+  .cal-day:hover:not(.disabled):not(.empty) { border-color: var(--gold); color: var(--gold); }
+  .cal-day.selected { background: var(--gold); color: var(--dark); font-weight: 500; }
+  .cal-day.today { border-color: var(--rule); color: var(--text); }
+  .cal-day.disabled { color: var(--text-dim); opacity: 0.3; cursor: not-allowed; }
+  .cal-day.empty { cursor: default; }
+  .cal-note { font-size: 0.75rem; color: var(--text-dim); margin-top: 1rem; font-style: italic; }
+
+  /* TIME SLOTS */
+  .time-label { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; }
+  .time-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2rem; }
+  .time-slot { padding: 0.5rem 1rem; border: 0.5px solid var(--rule); border-radius: 2px; font-size: 0.8rem; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+  .time-slot:hover { border-color: var(--gold); color: var(--gold); }
+  .time-slot.selected { background: var(--gold); border-color: var(--gold); color: var(--dark); }
+
+  /* FORM */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
+  input, textarea, select {
+    background: var(--dark-2); border: 0.5px solid var(--rule); color: var(--text);
+    padding: 0.7rem 1rem; font-family: var(--sans); font-size: 0.9rem; font-weight: 300;
+    border-radius: 2px; transition: border-color 0.2s; width: 100%;
+  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); }
+  textarea { min-height: 100px; resize: vertical; }
+  select option { background: var(--dark-2); }
+
+  /* SUMMARY BOX */
+  .summary-box { background: var(--dark-2); border: 0.5px solid var(--rule); padding: 1.5rem; margin-bottom: 2rem; }
+  .summary-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 0.5rem 0; border-bottom: 0.5px solid rgba(255,255,255,0.04); font-size: 0.85rem; }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-label { color: var(--text-dim); }
+  .summary-val { color: var(--text); text-align: right; }
+  .summary-price { color: var(--gold); font-family: var(--serif); font-size: 1.4rem; }
+
+  /* BUTTONS */
+  .btn-row { display: flex; gap: 1rem; align-items: center; margin-top: 2rem; }
+  .btn-primary { display: inline-block; padding: 0.85rem 2.5rem; background: var(--gold); color: var(--dark); font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border: none; border-radius: 2px; cursor: pointer; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-ghost { display: inline-block; padding: 0.85rem 2rem; border: 0.5px solid var(--rule); color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; background: none; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* SUCCESS */
+  .success-wrap { text-align: center; padding: 4rem 2rem; }
+  .success-icon { width: 56px; height: 56px; border: 0.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 1.5rem; color: var(--gold); }
+  .success-wrap h2 { font-family: var(--serif); font-size: 2.5rem; font-weight: 300; margin-bottom: 1rem; }
+  .success-wrap h2 em { color: var(--gold-light); font-style: italic; }
+  .success-wrap p { color: var(--text-muted); max-width: 460px; margin: 0 auto 1rem; font-size: 0.95rem; }
+
+  /* DASHBOARD */
+  .dash-login { max-width: 400px; margin: 8rem auto 0; padding: 2rem; background: var(--dark-2); border: 0.5px solid var(--rule); }
+  .dash-login h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; margin-bottom: 1.5rem; }
+  .dash-wrap { padding: 7rem 2rem 4rem; max-width: 1000px; margin: 0 auto; }
+  .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+  .dash-title { font-family: var(--serif); font-size: 2rem; font-weight: 300; }
+  .dash-title em { color: var(--gold-light); font-style: italic; }
+  .dash-tabs { display: flex; gap: 0; border-bottom: 0.5px solid var(--rule); margin-bottom: 2rem; }
+  .dash-tab { padding: 0.6rem 1.25rem; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; background: none; border: none; color: var(--text-dim); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -0.5px; transition: all 0.2s; }
+  .dash-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .booking-list { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 0.5px solid var(--rule); }
+  .booking-item { background: var(--dark); padding: 1.25rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 1rem; align-items: center; }
+  .booking-item:hover { background: var(--dark-2); }
+  .b-name { font-weight: 400; font-size: 0.95rem; }
+  .b-detail { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }
+  .b-date { font-size: 0.85rem; color: var(--text-muted); }
+  .b-pkg { font-size: 0.8rem; color: var(--gold); }
+  .b-status { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 2px; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; }
+  .b-status.pending { border: 0.5px solid var(--gold); color: var(--gold); }
+  .b-status.approved { border: 0.5px solid #4a9a6a; color: #4a9a6a; }
+  .b-status.declined { border: 0.5px solid #9a4a4a; color: #9a4a4a; }
+  .b-actions { display: flex; gap: 6px; }
+  .b-btn { padding: 0.3rem 0.75rem; border-radius: 2px; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; border: 0.5px solid; transition: all 0.15s; background: none; }
+  .b-btn.approve { border-color: #4a9a6a; color: #4a9a6a; }
+  .b-btn.approve:hover { background: #4a9a6a; color: var(--dark); }
+  .b-btn.decline { border-color: #9a4a4a; color: #9a4a4a; }
+  .b-btn.decline:hover { background: #9a4a4a; color: var(--text); }
+  .b-btn.view { border-color: var(--rule); color: var(--text-muted); }
+  .b-btn.view:hover { border-color: var(--gold); color: var(--gold); }
+  .empty-state { padding: 4rem; text-align: center; color: var(--text-dim); font-size: 0.9rem; background: var(--dark); }
+
+  /* MODAL */
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; }
+  .modal-bg.open { display: flex; }
+  .modal { background: var(--dark-2); border: 0.5px solid var(--rule); padding: 2rem; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; }
+  .modal h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 1.25rem; }
+  .modal-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 0.5px solid rgba(255,255,255,0.04); font-size: 0.85rem; }
+  .modal-label { color: var(--text-dim); }
+  .modal-val { color: var(--text); text-align: right; max-width: 60%; }
+  .modal-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+
+  .error-msg { font-size: 0.8rem; color: #c06060; margin-top: 0.5rem; }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 1.5px solid var(--dark); border-top-color: transparent; border-radius: 50%; animation: spin 0.6s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  footer { padding: 2rem 4rem; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-dim); }
+  footer a { color: var(--text-dim); text-decoration: none; }
+  footer a:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .page-wrap { padding: 6rem 1.25rem 4rem; }
+    .type-grid, .package-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .booking-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { flex-direction: column; gap: 1rem; }
+    .dash-wrap { padding: 5rem 1.25rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="56" height="36" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+      <text x="28" y="192" font-family="Georgia, serif" font-size="196" font-style="italic" font-weight="300" fill="#F0EDE6">O</text>
+      <text x="102" y="192" font-family="Georgia, serif" font-size="196" font-style="italic" font-weight="300" fill="none" stroke="#F0EDE6" stroke-width="1.5">C</text>
+      <line x1="40" y1="208" x2="360" y2="208" stroke="#B8965A" stroke-width="0.5"/>
+      <text x="200" y="232" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" letter-spacing="5" fill="#B8965A" text-anchor="middle">PHOTO CO.</text>
+    </svg>
+  </a>
+  <ul>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="booking.html" class="nav-cta">Book a Shoot</a></li>
+  </ul>
+</nav>
+
+<!-- ============ BOOKING FORM ============ -->
+<div id="booking-view">
+  <div class="page-wrap">
+    <div class="page-eyebrow">Schedule a session</div>
+    <h1 class="page-title">Book your <em>shoot.</em></h1>
+    <p class="page-sub">Select your session type, choose a package, pick a date and time, and submit your request. We'll confirm within one business day.</p>
+
+    <div class="steps">
+      <div class="step active" id="step-ind-1"><div class="step-num">1</div> Session Type</div>
+      <div class="step" id="step-ind-2"><div class="step-num">2</div> Package</div>
+      <div class="step" id="step-ind-3"><div class="step-num">3</div> Date & Time</div>
+      <div class="step" id="step-ind-4"><div class="step-num">4</div> Your Details</div>
+      <div class="step" id="step-ind-5"><div class="step-num">5</div> Review</div>
+    </div>
+
+    <!-- STEP 1: Session Type -->
+    <div class="panel active" id="panel-1">
+      <div class="type-grid">
+        <div class="type-card" onclick="selectType(this, 'Real Estate')">
+          <div class="type-name">Real Estate</div>
+          <div class="type-price">From $175</div>
+          <div class="type-desc">Residential listings, new construction, luxury properties, and short-term rentals.</div>
+        </div>
+        <div class="type-card" onclick="selectType(this, 'Commercial & Brand')">
+          <div class="type-name">Commercial & Brand</div>
+          <div class="type-price">From $350</div>
+          <div class="type-desc">Brand photography, restaurants, product, events, and social media content.</div>
+        </div>
+        <div class="type-card" onclick="selectType(this, 'Headshots & Portraits')">
+          <div class="type-name">Headshots & Portraits</div>
+          <div class="type-price">From $175</div>
+          <div class="type-desc">Individual headshots, professional portraits, and team photography.</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" onclick="goToStep(2)" id="btn-step1" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Package -->
+    <div class="panel" id="panel-2">
+      <div id="package-container"></div>
+      <div class="btn-row">
+        <button class="btn-ghost" onclick="goToStep(1)">Back</button>
+        <button class="btn-primary" onclick="goToStep(3)" id="btn-step2" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Date & Time -->
+    <div class="panel" id="panel-3">
+      <div class="calendar-wrap">
+        <div class="cal-header">
+          <button class="cal-nav" onclick="prevMonth()">&#8249;</button>
+          <div class="cal-month" id="cal-month-label"></div>
+          <button class="cal-nav" onclick="nextMonth()">&#8250;</button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+        <p class="cal-note">Weekends available by request. Availability subject to confirmation.</p>
+      </div>
+      <div id="time-section" style="display:none;">
+        <div class="time-label">Preferred start time</div>
+        <div class="time-grid">
+          <div class="time-slot" onclick="selectTime(this, '8:00 AM')">8:00 AM</div>
+          <div class="time-slot" onclick="selectTime(this, '9:00 AM')">9:00 AM</div>
+          <div class="time-slot" onclick="selectTime(this, '10:00 AM')">10:00 AM</div>
+          <div class="time-slot" onclick="selectTime(this, '11:00 AM')">11:00 AM</div>
+          <div class="time-slot" onclick="selectTime(this, '12:00 PM')">12:00 PM</div>
+          <div class="time-slot" onclick="selectTime(this, '1:00 PM')">1:00 PM</div>
+          <div class="time-slot" onclick="selectTime(this, '2:00 PM')">2:00 PM</div>
+          <div class="time-slot" onclick="selectTime(this, '3:00 PM')">3:00 PM</div>
+          <div class="time-slot" onclick="selectTime(this, '4:00 PM')">4:00 PM</div>
+          <div class="time-slot" onclick="selectTime(this, 'Golden Hour / Twilight')">Golden Hour / Twilight</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-ghost" onclick="goToStep(2)">Back</button>
+        <button class="btn-primary" onclick="goToStep(4)" id="btn-step3" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Details -->
+    <div class="panel" id="panel-4">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>First name</label>
+          <input type="text" id="f-first" placeholder="Jane" oninput="validateStep4()">
+        </div>
+        <div class="form-group">
+          <label>Last name</label>
+          <input type="text" id="f-last" placeholder="Smith" oninput="validateStep4()">
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" id="f-email" placeholder="jane@example.com" oninput="validateStep4()">
+        </div>
+        <div class="form-group">
+          <label>Phone number</label>
+          <input type="tel" id="f-phone" placeholder="(865) 555-0100" oninput="validateStep4()">
+        </div>
+        <div class="form-group full">
+          <label>Property / business address or location</label>
+          <input type="text" id="f-address" placeholder="123 Market Square, Knoxville TN" oninput="validateStep4()">
+        </div>
+        <div class="form-group full">
+          <label>Additional notes or special requests</label>
+          <textarea id="f-notes" placeholder="Tell us anything we should know — property size, access instructions, specific shots you want, etc."></textarea>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-ghost" onclick="goToStep(3)">Back</button>
+        <button class="btn-primary" onclick="goToStep(5)" id="btn-step4" disabled>Review booking</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: Review -->
+    <div class="panel" id="panel-5">
+      <div class="summary-box" id="summary-box"></div>
+      <p style="font-size:0.82rem; color:var(--text-dim); margin-bottom:1.5rem;">By submitting this request you agree to a 50% deposit upon confirmation. We'll reach out within one business day to confirm your session and send an invoice.</p>
+      <div class="btn-row">
+        <button class="btn-ghost" onclick="goToStep(4)">Back</button>
+        <button class="btn-primary" onclick="submitBooking()" id="btn-submit">Submit Request</button>
+      </div>
+      <div id="submit-error" class="error-msg" style="display:none;"></div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="panel" id="panel-success">
+      <div class="success-wrap">
+        <div class="success-icon">✦</div>
+        <h2>Request <em>received.</em></h2>
+        <p>Thank you! Your booking request has been submitted. You'll receive a confirmation email shortly, and we'll be in touch within one business day to confirm your session.</p>
+        <p style="margin-top:0.5rem;">Questions? Email us at <a href="mailto:info@rmcgillphotos.com" style="color:var(--gold);">info@rmcgillphotos.com</a></p>
+        <div style="margin-top:2rem;">
+          <a href="index.html" class="btn-primary" style="display:inline-block; text-decoration:none;">Back to home</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<div id="dashboard-view" style="display:none;">
+
+  <!-- Login -->
+  <div id="dash-login-wrap">
+    <div class="dash-login">
+      <h2>Dashboard <em style="font-style:italic; color:var(--gold-light);">login</em></h2>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="dash-password" placeholder="Enter dashboard password" onkeydown="if(event.key==='Enter')dashLogin()">
+      </div>
+      <div class="btn-row" style="margin-top:1rem;">
+        <button class="btn-primary" onclick="dashLogin()">Login</button>
+      </div>
+      <div id="login-error" class="error-msg" style="display:none;">Incorrect password.</div>
+    </div>
+  </div>
+
+  <!-- Dashboard content -->
+  <div id="dash-content" style="display:none;">
+    <div class="dash-wrap">
+      <div class="dash-header">
+        <div class="dash-title">Booking <em>dashboard</em></div>
+        <button class="btn-ghost" onclick="dashLogout()" style="font-size:0.7rem; padding:0.5rem 1rem;">Log out</button>
+      </div>
+
+      <div class="dash-tabs">
+        <button class="dash-tab active" onclick="filterBookings('pending', this)">Pending</button>
+        <button class="dash-tab" onclick="filterBookings('approved', this)">Approved</button>
+        <button class="dash-tab" onclick="filterBookings('declined', this)">Declined</button>
+        <button class="dash-tab" onclick="filterBookings('all', this)">All</button>
+      </div>
+
+      <div class="booking-list" id="booking-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <h3 id="modal-name"></h3>
+    <div id="modal-body"></div>
+    <div class="modal-actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Old City Photo Co. · Knoxville, TN</span>
+  <span><a href="index.html">oldcity.photo</a> · <a href="?dashboard">Dashboard</a></span>
+</footer>
+
+<script>
+// ─── STATE ───────────────────────────────────────────────
+const state = {
+  type: null, package: null, packagePrice: null,
+  date: null, time: null,
+  first: '', last: '', email: '', phone: '', address: '', notes: '',
+  currentStep: 1
+};
+
+const PACKAGES = {
+  'Real Estate': [
+    { tier: 'Standard', price: 175, desc: 'Essential listing coverage', features: ['Up to 25 edited photos','All interior rooms','Exterior front, back & features','MLS-ready images','24-hour delivery'] },
+    { tier: 'Premium', price: 250, desc: 'Everything in Standard, plus', features: ['Up to 35 edited photos','Detail & feature shots','Sky replacement if needed','Vertical images for socials','24-hour delivery'], featured: true },
+    { tier: 'Signature', price: 325, desc: 'Everything in Premium, plus', features: ['Up to 45 edited photos','Twilight edit (1–2 images)','Property reel for socials','Same day or next morning delivery'] }
+  ],
+  'Commercial & Brand': [
+    { tier: 'Mini Session', price: 350, desc: 'Up to 2 hours', features: ['20 edited images','One location','Social media license','48-hour delivery'] },
+    { tier: 'Half Day', price: 750, desc: 'Up to 4 hours', features: ['50 edited images','Multiple locations','Full commercial license','48-hour delivery'], featured: true },
+    { tier: 'Full Day', price: 1350, desc: 'Up to 8 hours', features: ['100+ edited images','Multiple locations & teams','Full commercial license','Priority 24-hr delivery'] }
+  ],
+  'Headshots & Portraits': [
+    { tier: 'Individual', price: 175, desc: '30-minute session', features: ['10 edited selects','1 outfit / look','Studio or on-location','48-hour delivery'] },
+    { tier: 'Professional', price: 275, desc: '60-minute session', features: ['20 edited selects','2 outfits / looks','LinkedIn & web optimized','48-hour delivery'], featured: true },
+    { tier: 'Team', price: 95, desc: 'Per person (4+ people)', features: ['15 min per person','5 edited selects each','Consistent background','Group shot included'] }
+  ]
+};
+
+// ─── STEP NAVIGATION ─────────────────────────────────────
+function goToStep(n) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+  document.querySelectorAll('.step').forEach((s, i) => {
+    s.classList.remove('active', 'done');
+    if (i + 1 < n) s.classList.add('done');
+    if (i + 1 === n) s.classList.add('active');
+  });
+  state.currentStep = n;
+  if (n === 5) buildSummary();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── TYPE SELECTION ───────────────────────────────────────
+function selectType(el, type) {
+  document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.type = type;
+  state.package = null; state.packagePrice = null;
+  document.getElementById('btn-step1').disabled = false;
+  renderPackages();
+}
+
+// ─── PACKAGE RENDERING ────────────────────────────────────
+function renderPackages() {
+  const pkgs = PACKAGES[state.type] || [];
+  const container = document.getElementById('package-container');
+  container.innerHTML = '<div class="package-grid">' + pkgs.map((p, i) =>
+    `<div class="package-card${p.featured ? ' featured-pkg' : ''}" onclick="selectPackage(this, '${p.tier}', ${p.price})">
+      <div class="pkg-tier">${p.tier}</div>
+      <div class="pkg-price"><sup>$</sup>${p.price.toLocaleString()}</div>
+      <div class="pkg-desc">${p.desc}</div>
+      <ul class="pkg-features">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
+    </div>`
+  ).join('') + '</div>';
+}
+
+function selectPackage(el, tier, price) {
+  document.querySelectorAll('.package-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.package = tier; state.packagePrice = price;
+  document.getElementById('btn-step2').disabled = false;
+}
+
+// ─── CALENDAR ────────────────────────────────────────────
+let calYear, calMonth;
+function initCal() {
+  const now = new Date();
+  calYear = now.getFullYear(); calMonth = now.getMonth();
+  renderCal();
+}
+function prevMonth() { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCal(); }
+function nextMonth() { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCal(); }
+function renderCal() {
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-month-label').textContent = months[calMonth] + ' ' + calYear;
+  const grid = document.getElementById('cal-grid');
+  const days = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const first = new Date(calYear, calMonth, 1).getDay();
+  const total = new Date(calYear, calMonth + 1, 0).getDate();
+  let html = days.map(d => `<div class="cal-day-name">${d}</div>`).join('');
+  for (let i = 0; i < first; i++) html += `<div class="cal-day empty"></div>`;
+  for (let d = 1; d <= total; d++) {
+    const date = new Date(calYear, calMonth, d);
+    const isPast = date < today;
+    const isSelected = state.date && state.date.toDateString() === date.toDateString();
+    const isToday = date.toDateString() === today.toDateString();
+    html += `<div class="cal-day${isPast ? ' disabled' : ''}${isSelected ? ' selected' : ''}${isToday ? ' today' : ''}"
+      ${!isPast ? `onclick="selectDate(${calYear}, ${calMonth}, ${d})"` : ''}>${d}</div>`;
+  }
+  grid.innerHTML = html;
+}
+function selectDate(y, m, d) {
+  state.date = new Date(y, m, d);
+  state.time = null;
+  document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
+  document.getElementById('time-section').style.display = 'block';
+  document.getElementById('btn-step3').disabled = true;
+  renderCal();
+}
+function selectTime(el, time) {
+  document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
+  el.classList.add('selected');
+  state.time = time;
+  document.getElementById('btn-step3').disabled = false;
+}
+
+// ─── STEP 4 VALIDATION ───────────────────────────────────
+function validateStep4() {
+  const ok = ['f-first','f-last','f-email','f-phone','f-address'].every(id => document.getElementById(id).value.trim());
+  document.getElementById('btn-step4').disabled = !ok;
+  state.first = document.getElementById('f-first').value.trim();
+  state.last = document.getElementById('f-last').value.trim();
+  state.email = document.getElementById('f-email').value.trim();
+  state.phone = document.getElementById('f-phone').value.trim();
+  state.address = document.getElementById('f-address').value.trim();
+  state.notes = document.getElementById('f-notes').value.trim();
+}
+
+// ─── SUMMARY ─────────────────────────────────────────────
+function buildSummary() {
+  const dateStr = state.date ? state.date.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' }) : '';
+  document.getElementById('summary-box').innerHTML = `
+    <div class="summary-row"><span class="summary-label">Name</span><span class="summary-val">${state.first} ${state.last}</span></div>
+    <div class="summary-row"><span class="summary-label">Email</span><span class="summary-val">${state.email}</span></div>
+    <div class="summary-row"><span class="summary-label">Phone</span><span class="summary-val">${state.phone}</span></div>
+    <div class="summary-row"><span class="summary-label">Session type</span><span class="summary-val">${state.type}</span></div>
+    <div class="summary-row"><span class="summary-label">Package</span><span class="summary-val">${state.package}</span></div>
+    <div class="summary-row"><span class="summary-label">Requested date</span><span class="summary-val">${dateStr}</span></div>
+    <div class="summary-row"><span class="summary-label">Preferred time</span><span class="summary-val">${state.time}</span></div>
+    <div class="summary-row"><span class="summary-label">Location</span><span class="summary-val">${state.address}</span></div>
+    ${state.notes ? `<div class="summary-row"><span class="summary-label">Notes</span><span class="summary-val">${state.notes}</span></div>` : ''}
+    <div class="summary-row" style="margin-top:0.5rem; padding-top:1rem; border-top:0.5px solid var(--rule);">
+      <span class="summary-label">Session total</span>
+      <span class="summary-price">$${state.packagePrice.toLocaleString()}</span>
+    </div>
+    <div class="summary-row"><span class="summary-label">Deposit due on confirmation</span><span class="summary-val" style="color:var(--gold);">$${Math.round(state.packagePrice/2).toLocaleString()}</span></div>`;
+}
+
+// ─── SUBMIT ──────────────────────────────────────────────
+async function submitBooking() {
+  const btn = document.getElementById('btn-submit');
+  const errEl = document.getElementById('submit-error');
+  btn.innerHTML = '<span class="spinner"></span> Submitting...';
+  btn.disabled = true;
+  errEl.style.display = 'none';
+
+  const booking = {
+    id: 'BK-' + Date.now(),
+    status: 'pending',
+    submittedAt: new Date().toISOString(),
+    name: state.first + ' ' + state.last,
+    first: state.first, last: state.last,
+    email: state.email, phone: state.phone,
+    type: state.type, package: state.package, price: state.packagePrice,
+    date: state.date.toISOString(), time: state.time,
+    address: state.address, notes: state.notes
+  };
+
+  try {
+    const existing = await loadBookings();
+    existing.push(booking);
+    await window.storage.set('bookings', JSON.stringify(existing));
+    goToStep(6);
+    document.getElementById('panel-success').classList.add('active');
+    document.querySelectorAll('.steps').forEach(s => s.style.display = 'none');
+  } catch(e) {
+    errEl.textContent = 'Something went wrong. Please email us directly at info@rmcgillphotos.com';
+    errEl.style.display = 'block';
+    btn.innerHTML = 'Submit Request';
+    btn.disabled = false;
+  }
+}
+
+// ─── STORAGE ─────────────────────────────────────────────
+async function loadBookings() {
+  try {
+    const r = await window.storage.get('bookings');
+    return r ? JSON.parse(r.value) : [];
+  } catch { return []; }
+}
+async function saveBookings(bookings) {
+  await window.storage.set('bookings', JSON.stringify(bookings));
+}
+
+// ─── DASHBOARD ───────────────────────────────────────────
+const DASH_PASSWORD = 'oldcity2026';
+let currentFilter = 'pending';
+let allBookings = [];
+let modalId = null;
+
+function dashLogin() {
+  const pw = document.getElementById('dash-password').value;
+  if (pw === DASH_PASSWORD) {
+    document.getElementById('dash-login-wrap').style.display = 'none';
+    document.getElementById('dash-content').style.display = 'block';
+    loadAndRender();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+function dashLogout() {
+  document.getElementById('dash-content').style.display = 'none';
+  document.getElementById('dash-login-wrap').style.display = 'block';
+  document.getElementById('dash-password').value = '';
+}
+
+async function loadAndRender() {
+  allBookings = await loadBookings();
+  renderBookings();
+}
+
+function filterBookings(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderBookings();
+}
+
+function renderBookings() {
+  const list = document.getElementById('booking-list');
+  const filtered = currentFilter === 'all' ? allBookings : allBookings.filter(b => b.status === currentFilter);
+  if (!filtered.length) {
+    list.innerHTML = `<div class="empty-state">No ${currentFilter === 'all' ? '' : currentFilter} bookings yet.</div>`;
+    return;
+  }
+  filtered.sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+  list.innerHTML = filtered.map(b => {
+    const d = new Date(b.date);
+    const dateStr = d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+    return `<div class="booking-item">
+      <div>
+        <div class="b-name">${b.name}</div>
+        <div class="b-detail">${b.email} · ${b.phone}</div>
+      </div>
+      <div>
+        <div class="b-date">${dateStr} · ${b.time}</div>
+        <div class="b-detail">${b.address}</div>
+      </div>
+      <div>
+        <div class="b-pkg">${b.type} — ${b.package}</div>
+        <div class="b-detail">$${b.price.toLocaleString()} · Deposit: $${Math.round(b.price/2).toLocaleString()}</div>
+      </div>
+      <div class="b-actions">
+        <button class="b-btn view" onclick="viewBooking('${b.id}')">View</button>
+        ${b.status === 'pending' ? `
+          <button class="b-btn approve" onclick="updateStatus('${b.id}', 'approved')">Approve</button>
+          <button class="b-btn decline" onclick="updateStatus('${b.id}', 'declined')">Decline</button>
+        ` : `<span class="b-status ${b.status}">${b.status}</span>`}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function viewBooking(id) {
+  const b = allBookings.find(x => x.id === id);
+  if (!b) return;
+  modalId = id;
+  document.getElementById('modal-name').textContent = b.name;
+  const d = new Date(b.date);
+  const dateStr = d.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+  document.getElementById('modal-body').innerHTML = [
+    ['Email', b.email], ['Phone', b.phone],
+    ['Session type', b.type], ['Package', b.package],
+    ['Price', '$' + b.price.toLocaleString()], ['Deposit', '$' + Math.round(b.price/2).toLocaleString()],
+    ['Date', dateStr], ['Time', b.time],
+    ['Location', b.address],
+    b.notes ? ['Notes', b.notes] : null,
+    ['Submitted', new Date(b.submittedAt).toLocaleString()],
+    ['Status', b.status.toUpperCase()]
+  ].filter(Boolean).map(([l,v]) =>
+    `<div class="modal-row"><span class="modal-label">${l}</span><span class="modal-val">${v}</span></div>`
+  ).join('');
+  document.getElementById('modal-actions').innerHTML = b.status === 'pending'
+    ? `<button class="b-btn approve" onclick="updateStatus('${b.id}','approved'); closeModal()">Approve</button>
+       <button class="b-btn decline" onclick="updateStatus('${b.id}','declined'); closeModal()">Decline</button>
+       <button class="b-btn view" onclick="closeModal()">Close</button>`
+    : `<button class="b-btn view" onclick="closeModal()">Close</button>`;
+  document.getElementById('modal-bg').classList.add('open');
+}
+
+function closeModal() { document.getElementById('modal-bg').classList.remove('open'); }
+
+async function updateStatus(id, status) {
+  const idx = allBookings.findIndex(b => b.id === id);
+  if (idx === -1) return;
+  allBookings[idx].status = status;
+  await saveBookings(allBookings);
+  renderBookings();
+}
+
+// ─── ROUTING ─────────────────────────────────────────────
+function init() {
+  if (window.location.search.includes('dashboard')) {
+    document.getElementById('booking-view').style.display = 'none';
+    document.getElementById('dashboard-view').style.display = 'block';
+  }
+  initCal();
+}
+
+// ─── STEP 6 PANEL (success) ──────────────────────────────
+function goToStep(n) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('panel-' + (n === 6 ? 'success' : n));
+  if (panel) panel.classList.add('active');
+  if (n !== 6) {
+    document.querySelectorAll('.step').forEach((s, i) => {
+      s.classList.remove('active', 'done');
+      if (i + 1 < n) s.classList.add('done');
+      if (i + 1 === n) s.classList.add('active');
+    });
+    state.currentStep = n;
+    if (n === 5) buildSummary();
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.getElementById('modal-bg').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
