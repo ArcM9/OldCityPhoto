@@ -322,7 +322,7 @@
       <h2>Request <em>received.</em></h2>
       <p>Your booking request has been submitted and a confirmation has been sent to your email.</p>
       <p>We will be in touch within one business day to confirm your session and send a deposit invoice.</p>
-      <p style="margin-top:1rem;">Questions? Email <a href="mailto:info@rmcgillphotos.com" style="color:var(--gold);text-decoration:none;">info@rmcgillphotos.com</a></p>
+      <p style="margin-top:1rem;">Questions? Email <a href="mailto:info@oldcity.photo" style="color:var(--gold);text-decoration:none;">info@oldcity.photo</a></p>
       <div style="margin-top:2.5rem;"><a href="index.html" class="btn-primary">Back to home</a></div>
     </div>
   </div>
@@ -586,14 +586,14 @@ async function submitBooking() {
       showSuccess();
     } else {
       const msg = data.errors ? data.errors.map(e=>e.message).join(', ') : (data.error || 'Unknown error');
-      err.textContent = 'Submission error: ' + msg + ' — or email us at info@rmcgillphotos.com';
+      err.textContent = 'Submission error: ' + msg + ' — or email us at info@oldcity.photo';
       err.style.display = 'block';
       btn.disabled = false;
       btn.innerHTML = 'Submit Request';
     }
   } catch(e) {
     console.error('Fetch error:', e);
-    err.textContent = 'Network error: ' + e.message + ' — please email us at info@rmcgillphotos.com';
+    err.textContent = 'Network error: ' + e.message + ' — please email us at info@oldcity.photo';
     err.style.display = 'block';
     btn.disabled = false;
     btn.innerHTML = 'Submit Request';
