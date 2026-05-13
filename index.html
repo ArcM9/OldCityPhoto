@@ -625,5 +625,42 @@
     });
   });
 </script>
+  <div class="rule"></div>
+
+<section id="reviews" style="text-align:center;">
+  <div class="section-label" style="justify-content:center;">Client reviews</div>
+  <h2 class="display">What clients <em>say.</em></h2>
+  <div id="reviews-container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1px; background:var(--rule); border:0.5px solid var(--rule); margin-top:3rem; text-align:left;"></div>
+  <a href="https://g.page/r/CdS1kmkqUQtMEBM/review" target="_blank" style="display:inline-block; margin-top:2rem; font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); text-decoration:none; border:0.5px solid var(--gold); padding:0.7rem 1.5rem; border-radius:2px;">Leave a Review</a>
+</section>
+
+<script>
+function loadReviews() {
+  const placeId = 'ChIJBdS1mWkqUQtMEBM';
+  const apiKey = 'AIzaSyCNeOqzMAerAn6AlX5p5QN39weiwBPKpXU';
+  const service = new google.maps.places.PlacesService(document.createElement('div'));
+  service.getDetails({ placeId: placeId, fields: ['reviews', 'rating', 'user_ratings_total'] }, function(place, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      const container = document.getElementById('reviews-container');
+      if (place.reviews && place.reviews.length > 0) {
+        place.reviews.forEach(function(review) {
+          if (review.rating >= 4) {
+            const stars = '✦'.repeat(review.rating);
+            container.innerHTML += `
+              <div style="background:var(--dark); padding:2rem;">
+                <div style="color:var(--gold); font-size:0.7rem; letter-spacing:0.15em; margin-bottom:1rem;">${stars}</div>
+                <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.85; margin-bottom:1.25rem; font-style:italic;">"${review.text}"</p>
+                <div style="font-size:0.75rem; color:var(--text-dim); letter-spacing:0.08em;">${review.author_name}</div>
+              </div>`;
+          }
+        });
+      } else {
+        container.innerHTML = '<div style="padding:2rem; color:var(--text-dim); font-size:0.88rem;">Reviews loading...</div>';
+      }
+    }
+  });
+}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=loadReviews"></script>
 </body>
 </html>
