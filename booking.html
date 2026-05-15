@@ -596,7 +596,7 @@ async function submitBooking() {
     const data = await res.json();
     console.log('Formspree status:', res.status, data);
     if (res.ok) {
-      showSuccess();
+      window.location.href = 'thank-you.html';
     } else {
       const msg = data.errors ? data.errors.map(e=>e.message).join(', ') : (data.error || 'Unknown error');
       err.textContent = 'Submission error: ' + msg + ' — or email us at info@oldcity.photo';
