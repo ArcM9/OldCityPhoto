@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1520 Ravenview Way — Photo Gallery | Old City Photo Co.</title>
+<meta name="description" content="Prepared for Richard Bell. Professional real estate photography by Old City Photo Co. — Knoxville, TN">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #B8965A; --gold-light: #D4B07A; --dark: #0E0E0C; --dark-2: #1A1A17;
+    --dark-3: #252520; --text: #F0EDE6; --text-muted: #9E9B92; --text-dim: #6A6860;
+    --rule: rgba(184,150,90,0.25);
+    --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--dark); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; font-weight: 300; min-height: 100vh; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 4rem; background: rgba(14,14,12,0.92); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--rule); }
+  .nav-logo { text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+  nav ul a { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  nav ul a:hover { color: var(--gold); }
+  .nav-cta { color: var(--gold) !important; border: 0.5px solid var(--gold); padding: 0.5rem 1.25rem; border-radius: 2px; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--dark) !important; }
+
+  .page-wrap { max-width: 1200px; margin: 0 auto; padding: 8rem 2rem 6rem; }
+
+  .gallery-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 0.5px solid var(--rule); }
+  .gallery-eyebrow { font-size: 0.68rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
+  .gallery-eyebrow::after { content: ''; display: block; height: 0.5px; width: 32px; background: var(--gold); }
+  .gallery-address { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.1; margin-bottom: 0.5rem; }
+  .gallery-address em { font-style: italic; color: var(--gold-light); }
+  .gallery-meta { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+
+  .expiry-notice { background: var(--dark-2); border: 0.5px solid var(--rule); border-left: 2px solid var(--gold); padding: 0.9rem 1.25rem; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2rem; border-radius: 0 2px 2px 0; }
+  .expiry-notice strong { color: var(--text); }
+
+  .action-bar { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 3rem; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; background: var(--gold); color: var(--dark); font-family: var(--sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.2s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; border: 0.5px solid var(--rule); color: var(--text-muted); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; background: none; cursor: pointer; }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .photo-count { font-size: 0.78rem; color: var(--text-dim); }
+
+  /* SECTION LABELS */
+  .section-divider { margin: 3.5rem 0 2rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--rule); display: flex; align-items: center; gap: 1rem; }
+  .section-divider-label { font-size: 0.68rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); }
+  .section-divider-line { flex: 1; height: 0.5px; background: var(--rule); }
+
+  /* MASONRY GALLERY */
+  .gallery-grid { columns: 3; gap: 6px; }
+  .gallery-item { break-inside: avoid; margin-bottom: 6px; cursor: pointer; overflow: hidden; position: relative; }
+  .gallery-item img { width: 100%; display: block; transition: transform 0.3s ease; }
+  .gallery-item:hover img { transform: scale(1.02); }
+  .gallery-item .overlay { position: absolute; inset: 0; background: rgba(14,14,12,0); transition: background 0.2s; display: flex; align-items: center; justify-content: center; }
+  .gallery-item:hover .overlay { background: rgba(14,14,12,0.3); }
+  .overlay-icon { color: var(--text); font-size: 1.5rem; opacity: 0; transition: opacity 0.2s; }
+  .gallery-item:hover .overlay-icon { opacity: 1; }
+
+  /* DRONE GRID — 2 col */
+  .drone-grid { columns: 2; gap: 6px; }
+  .drone-grid .gallery-item { margin-bottom: 6px; }
+
+  /* 360 TOUR */
+  .tour-wrap { background: var(--dark-2); border: 0.5px solid var(--rule); overflow: hidden; margin-bottom: 1rem; }
+  .tour-wrap iframe { width: 100%; height: 500px; border: none; display: block; }
+  .tour-note { font-size: 0.78rem; color: var(--text-dim); font-style: italic; margin-top: 0.75rem; }
+
+  /* LOADING STATE */
+  .gallery-loading { text-align: center; padding: 4rem 2rem; color: var(--text-dim); font-style: italic; font-size: 0.9rem; }
+  .gallery-error { text-align: center; padding: 4rem 2rem; color: var(--text-dim); font-size: 0.9rem; }
+
+  /* LIGHTBOX */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(14,14,12,0.97); z-index: 1000; align-items: center; justify-content: center; }
+  .lightbox.active { display: flex; }
+  .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+  .lightbox-img { max-width: 90vw; max-height: 85vh; object-fit: contain; display: block; }
+  .lightbox-close { position: fixed; top: 1.5rem; right: 2rem; color: var(--text-muted); font-size: 1.8rem; cursor: pointer; background: none; border: none; line-height: 1; transition: color 0.2s; z-index: 1001; }
+  .lightbox-close:hover { color: var(--gold); }
+  .lightbox-prev, .lightbox-next { position: fixed; top: 50%; transform: translateY(-50%); background: none; border: 0.5px solid var(--rule); color: var(--text-muted); width: 44px; height: 44px; cursor: pointer; font-size: 1.2rem; border-radius: 2px; transition: all 0.2s; z-index: 1001; }
+  .lightbox-prev { left: 1.5rem; }
+  .lightbox-next { right: 1.5rem; }
+  .lightbox-prev:hover, .lightbox-next:hover { border-color: var(--gold); color: var(--gold); }
+  .lightbox-counter { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; }
+  .lightbox-download { position: fixed; bottom: 1.5rem; right: 2rem; }
+
+  footer { padding: 2rem 4rem; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-dim); margin-top: 4rem; }
+  footer a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .page-wrap { padding: 6rem 1.25rem 4rem; }
+    .gallery-grid { columns: 2; }
+    .drone-grid { columns: 1; }
+    .tour-wrap iframe { height: 300px; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .gallery-grid { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-logo">
+    <svg width="56" height="36" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+      <text x="28" y="192" font-family="Georgia, serif" font-size="196" font-style="italic" font-weight="300" fill="#F0EDE6">O</text>
+      <text x="102" y="192" font-family="Georgia, serif" font-size="196" font-style="italic" font-weight="300" fill="none" stroke="#F0EDE6" stroke-width="1.5">C</text>
+      <line x1="40" y1="208" x2="360" y2="208" stroke="#B8965A" stroke-width="0.5"/>
+      <text x="200" y="232" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" letter-spacing="5" fill="#B8965A" text-anchor="middle">PHOTO CO.</text>
+    </svg>
+  </a>
+  <ul>
+    <li><a href="/index.html#services">Services</a></li>
+    <li><a href="/index.html#pricing">Pricing</a></li>
+    <li><a href="/portfolio.html">Portfolio</a></li>
+    <li><a href="/booking.html" class="nav-cta">Book a Shoot</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="gallery-header">
+    <div class="gallery-eyebrow">Photo Delivery</div>
+    <h1 class="gallery-address">1520 Ravenview Way, <em>Sevierville, TN</em></h1>
+    <div class="gallery-meta">Photographed by Ryan McGill &nbsp;·&nbsp; Old City Photo Co. &nbsp;·&nbsp; Knoxville, TN</div>
+    <div class="expiry-notice">
+      📅 <strong>Gallery available until July 27, 2026.</strong> Please download your photos before this date — galleries are removed after 60 days.
+    </div>
+  </div>
+
+  <!-- INTERIOR & EXTERIOR PHOTOS -->
+  <div class="action-bar">
+    <a href="https://drive.google.com/drive/folders/1J9ZOehdXckXtuVHysf1LUZBtyv7KEFC7?usp=drive_link" target="_blank" class="btn-primary">
+      ↓ Download All Photos
+    </a>
+    <span class="photo-count" id="photo-count">Loading photos...</span>
+  </div>
+
+  <div class="gallery-grid" id="gallery-grid">
+    <div class="gallery-loading">Loading your photos...</div>
+  </div>
+
+  <!-- DRONE SECTION -->
+  <div class="section-divider">
+    <span class="section-divider-label">Drone & Aerial Photography</span>
+    <span class="section-divider-line"></span>
+  </div>
+  <div class="action-bar">
+    <a href="DRONE_FOLDER_LINK" target="_blank" class="btn-ghost">↓ Download Drone Photos</a>
+    <span class="photo-count" id="drone-count"></span>
+  </div>
+  <div class="drone-grid" id="drone-grid">
+    <div class="gallery-loading">Loading drone photos...</div>
+  </div>
+
+  <!-- 360 TOUR SECTION -->
+  <div class="section-divider">
+    <span class="section-divider-label">360° Virtual Tour</span>
+    <span class="section-divider-line"></span>
+  </div>
+  <div class="tour-wrap">
+    <iframe src="MATTERPORT_LINK" allowfullscreen allow="xr-spatial-tracking"></iframe>
+  </div>
+  <p class="tour-note">Use your mouse or touch to explore the property in 360°. Best experienced in full screen.</p>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <div class="lightbox-inner">
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  </div>
+  <button class="lightbox-next" onclick="lightboxNav(1)">›</button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+  <div class="lightbox-download">
+    <a id="lightbox-dl" href="" download class="btn-ghost" style="font-size:0.68rem;">↓ Download</a>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Old City Photo Co. · Knoxville, TN</span>
+  <span><a href="/index.html">oldcity.photo</a> &nbsp;·&nbsp; <a href="tel:+18657652681">(865) 765-2681</a></span>
+</footer>
+
+<script>
+let photos = [];
+let dronePhotos = [];
+let currentIndex = 0;
+let currentSet = [];
+
+// ── MAIN PHOTOS ──────────────────────────────────────────
+const PHOTOS = [
+  "1psWjZZCiaRJlpVIL2v6I0IMHbK0QRKWz",
+  "1yqD7ZtBSKgsU8Y1H4L-rsn-TLyWAEw-6",
+  "1sXc-rW5IO0_oO2mO2RUo9h_xP-FBVUA8",
+  "1CAZmnxL-3DACAArwP7h9u4bjujApcIWj",
+  "12NN3d_uJUiBaUjmDXz63uEBZ3lYabQK-",
+  "1lVJTemwS2RGeczkNc8NDE1RNNs28oooJ",
+  "1g0koqgXICHQCKa7b4XNpuzGVJQw8azyz",
+  "1Oiass-pdzFOwAasxqphUBjxxS5LrdwUb",
+  "1QWH6i6hsYdiNMQZgmhZqDnTvJ-mxw6ac",
+  "1YVxB2AofB8goUKjIXd3mZZL1SbAvvSXX",
+  "16Pd_PKSxTDMOk7IO4UWqocGE-ULqP5ni",
+  "1Cu7D5vqEMjX61Thos7nmdXd4z-t7AKn0",
+  "1FElMIFbjgWhZ50FKtPDMMcunDbt0na7W",
+  "1i3iJQgcduHqg-nV4tS9yH5OYTYhQhDsp",
+  "1IgvrmOPyGyOpXhRQHnbBTFeo6mn10caG",
+  "1ZwptAJVtWwvm3jyr4Gr00-RehSXKBeYm",
+  "12JYi6ihM4zvsQncZVqMUf5OWbRIA0kaT",
+  "1ymYcgnx-psO1lf32fkw7taqDYraUSElJ",
+  "11AVJwl5Rfk5ZZ3G4tJCFMmfqRx8BkUIk",
+  "11YRM-mVBIIQq4NqFYMzeZ2Bh_MeouhRj",
+  "1v6UXLoyLEMKHx_KuGgWSYqehXR8PZySU",
+  "1N_9vV1eyiWLPyTqrHNOJgOMDmoPdXkjr",
+];
+
+// ── DRONE PHOTOS ─────────────────────────────────────────
+// Add drone photo IDs here — same process as main photos
+const DRONE_PHOTOS = [
+  // 'drone_photo_id_1',
+  // 'drone_photo_id_2',
+];
+
+function getThumbUrl(id) {
+  return `https://lh3.googleusercontent.com/d/${id}=w800`;
+}
+
+function getFullUrl(id) {
+  return `https://drive.google.com/uc?export=view&id=${id}`;
+}
+
+function renderPhotosFromArray() {
+  const grid = document.getElementById('gallery-grid');
+  const count = document.getElementById('photo-count');
+  photos = PHOTOS;
+  count.textContent = `${photos.length} photo${photos.length !== 1 ? 's' : ''}`;
+  grid.innerHTML = photos.map((id, i) => `
+    <div class="gallery-item" onclick="openLightbox(${i}, 'main')">
+      <img src="${getThumbUrl(id)}" alt="Property photo ${i+1}" loading="lazy">
+      <div class="overlay"><span class="overlay-icon">⊕</span></div>
+    </div>
+  `).join('');
+}
+
+function renderDronePhotos() {
+  const grid = document.getElementById('drone-grid');
+  const count = document.getElementById('drone-count');
+  dronePhotos = DRONE_PHOTOS;
+  if (!dronePhotos.length) {
+    grid.innerHTML = '<div class="gallery-loading">Drone photos coming soon.</div>';
+    count.textContent = '';
+    return;
+  }
+  count.textContent = `${dronePhotos.length} aerial photo${dronePhotos.length !== 1 ? 's' : ''}`;
+  grid.innerHTML = dronePhotos.map((id, i) => `
+    <div class="gallery-item" onclick="openLightbox(${i}, 'drone')">
+      <img src="${getThumbUrl(id)}" alt="Drone photo ${i+1}" loading="lazy">
+      <div class="overlay"><span class="overlay-icon">⊕</span></div>
+    </div>
+  `).join('');
+}
+
+// ── LIGHTBOX ─────────────────────────────────────────────
+function openLightbox(index, set) {
+  currentSet = set === 'drone' ? dronePhotos : photos;
+  currentIndex = index;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function lightboxNav(dir) {
+  currentIndex = (currentIndex + dir + currentSet.length) % currentSet.length;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  const id = currentSet[currentIndex];
+  document.getElementById('lightbox-img').src = getFullUrl(id);
+  document.getElementById('lightbox-counter').textContent = `${currentIndex + 1} / ${currentSet.length}`;
+  document.getElementById('lightbox-dl').href = `https://drive.google.com/uc?export=download&id=${id}`;
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+  if (e.key === 'Escape') closeLightbox();
+});
+
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+});
+
+renderPhotosFromArray();
+renderDronePhotos();
+</script>
+</body>
+</html>
