@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2904 NE Gordon Place — Photo Gallery | Old City Photo Co.</title>
+<meta name="description" content="Professional real estate photography by Old City Photo Co. — Knoxville, TN">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #B8965A; --gold-light: #D4B07A; --dark: #0E0E0C; --dark-2: #1A1A17;
+    --dark-3: #252520; --text: #F0EDE6; --text-muted: #9E9B92; --text-dim: #6A6860;
+    --rule: rgba(184,150,90,0.25);
+    --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--dark); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; font-weight: 300; min-height: 100vh; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 4rem; background: rgba(14,14,12,0.92); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--rule); }
+  .nav-logo { text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+  nav ul a { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  nav ul a:hover { color: var(--gold); }
+  .nav-cta { color: var(--gold) !important; border: 0.5px solid var(--gold); padding: 0.5rem 1.25rem; border-radius: 2px; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--dark) !important; }
+
+  .page-wrap { max-width: 1200px; margin: 0 auto; padding: 8rem 2rem 6rem; }
+
+  .gallery-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 0.5px solid var(--rule); }
+  .gallery-eyebrow { font-size: 0.68rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
+  .gallery-eyebrow::after { content: ''; display: block; height: 0.5px; width: 32px; background: var(--gold); }
+  .gallery-address { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.1; margin-bottom: 0.5rem; }
+  .gallery-address em { font-style: italic; color: var(--gold-light); }
+  .gallery-meta { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+
+  .expiry-notice { background: var(--dark-2); border: 0.5px solid var(--rule); border-left: 2px solid var(--gold); padding: 0.9rem 1.25rem; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2rem; border-radius: 0 2px 2px 0; }
+  .expiry-notice strong { color: var(--text); }
+
+  .action-bar { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 3rem; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; background: var(--gold); color: var(--dark); font-family: var(--sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.2s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; border: 0.5px solid var(--rule); color: var(--text-muted); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; background: none; cursor: pointer; }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .photo-count { font-size: 0.78rem; color: var(--text-dim); }
+
+  .gallery-grid { columns: 3; gap: 6px; }
+  .gallery-item { break-inside: avoid; margin-bottom: 6px; cursor: pointer; overflow: hidden; position: relative; }
+  .gallery-item img { width: 100%; display: block; transition: transform 0.3s ease; }
+  .gallery-item:hover img { transform: scale(1.02); }
+  .gallery-item .overlay { position: absolute; inset: 0; background: rgba(14,14,12,0); transition: background 0.2s; display: flex; align-items: center; justify-content: center; }
+  .gallery-item:hover .overlay { background: rgba(14,14,12,0.3); }
+  .overlay-icon { color: var(--text); font-size: 1.5rem; opacity: 0; transition: opacity 0.2s; }
+  .gallery-item:hover .overlay-icon { opacity: 1; }
+
+  .gallery-loading { text-align: center; padding: 4rem 2rem; color: var(--text-dim); font-style: italic; font-size: 0.9rem; }
+
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(14,14,12,0.97); z-index: 1000; align-items: center; justify-content: center; }
+  .lightbox.active { display: flex; }
+  .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+  .lightbox-img { max-width: 90vw; max-height: 85vh; object-fit: contain; display: block; }
+  .lightbox-close { position: fixed; top: 1.5rem; right: 2rem; color: var(--text-muted); font-size: 1.8rem; cursor: pointer; background: none; border: none; line-height: 1; transition: color 0.2s; z-index: 1001; }
+  .lightbox-close:hover { color: var(--gold); }
+  .lightbox-prev, .lightbox-next { position: fixed; top: 50%; transform: translateY(-50%); background: none; border: 0.5px solid var(--rule); color: var(--text-muted); width: 44px; height: 44px; cursor: pointer; font-size: 1.2rem; border-radius: 2px; transition: all 0.2s; z-index: 1001; }
+  .lightbox-prev { left: 1.5rem; }
+  .lightbox-next { right: 1.5rem; }
+  .lightbox-prev:hover, .lightbox-next:hover { border-color: var(--gold); color: var(--gold); }
+  .lightbox-counter { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; }
+  .lightbox-download { position: fixed; bottom: 1.5rem; right: 2rem; }
+
+  footer { padding: 2rem 4rem; border-top: 0.5px solid var(--rule); display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-dim); margin-top: 4rem; }
+  footer a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .page-wrap { padding: 6rem 1.25rem 4rem; }
+    .gallery-grid { columns: 2; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .gallery-grid { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-logo">
+    <svg width="56" height="36" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+      <text x="28" y="192" font-family="Georgia, serif" font-size="196" font-style="italic" font-weight="300" fill="#F0EDE6">O</text>
+      <text x="102" y="192" font-family="Georgia, serif" font-size="196" font-style="italic" font-weight="300" fill="none" stroke="#F0EDE6" stroke-width="1.5">C</text>
+      <line x1="40" y1="208" x2="360" y2="208" stroke="#B8965A" stroke-width="0.5"/>
+      <text x="200" y="232" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" letter-spacing="5" fill="#B8965A" text-anchor="middle">PHOTO CO.</text>
+    </svg>
+  </a>
+  <ul>
+    <li><a href="/index.html#services">Services</a></li>
+    <li><a href="/index.html#pricing">Pricing</a></li>
+    <li><a href="/portfolio.html">Portfolio</a></li>
+    <li><a href="/booking.html" class="nav-cta">Book a Shoot</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="gallery-header">
+    <div class="gallery-eyebrow">Photo Delivery</div>
+    <h1 class="gallery-address">2904 NE Gordon Place, <em>Knoxville, TN</em></h1>
+    <div class="gallery-meta">Photographed by Ryan McGill &nbsp;·&nbsp; Old City Photo Co. &nbsp;·&nbsp; Knoxville, TN</div>
+    <div class="expiry-notice">
+      📅 <strong>Gallery available until Friday, July 31, 2026.</strong> Please download your photos before this date — galleries are removed after 60 days.
+    </div>
+  </div>
+
+  <div class="action-bar">
+    <a href="DRIVE_FOLDER_LINK" target="_blank" class="btn-primary">↓ Download All Photos</a>
+    <span class="photo-count" id="photo-count">Loading photos...</span>
+  </div>
+
+  <div class="gallery-grid" id="gallery-grid">
+    <div class="gallery-loading">Loading your photos...</div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <div class="lightbox-inner">
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  </div>
+  <button class="lightbox-next" onclick="lightboxNav(1)">›</button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+  <div class="lightbox-download">
+    <a id="lightbox-dl" href="" download class="btn-ghost" style="font-size:0.68rem;">↓ Download</a>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Old City Photo Co. · Knoxville, TN</span>
+  <span><a href="/index.html">oldcity.photo</a> &nbsp;·&nbsp; <a href="tel:+18657652681">(865) 765-2681</a></span>
+</footer>
+
+<script>
+let photos = [];
+let currentIndex = 0;
+
+const PHOTOS = [
+  "1OTgAIfWMI6K_nbCFy7dqv9WlbMBct4TQ",
+  "1nareyzVUbHQnwudFWz0VBU0enxsn-Lp8",
+  "1ZTfi0n6poymmZjwewM42NJudk-I7SXVR",
+  "1Iv8qVJiN4P8mtvGxRiex_g1c_1hSgHpi",
+  "1cv-qEwt4AVpUQPlHtZV-X2CBM1liQU3p",
+  "11E8c-NKwRY8vM8UmCQJxVQTgz6VkqMhr",
+  "1udRjLrrz8Pq0uP8kQanZPi_9gWeGeWlr",
+  "1obPg3phsScdO4m2m7x3AdjjVbBZ_QbJe",
+  "1FY7siN3lOdr6fYC0J4yZ4IQV0BbyiXs3",
+  "1mEHjCyuWgY91iiFipe9OjhXyq5STd5ni",
+  "1ShHUOmmVdjF9M_nEd5I2AKgF7lbrpHOl",
+  "1KJHVv8NhyLnVzkyNu1V6E3eIGvbBmdl3",
+  "11xmZcLZHtZb-rAoZRVxVHLiTBYxZ4YjM",
+  "1mLPa8p2wZVu5dr4JzDO3JyRFnYwvGT1A",
+  "19pLA2sH5A22jBp0onzMtyUu4TaVeNEwG",
+  "17xF6nTBaUIpJv4drF_P_H8eZZGJmykBc",
+  "1Sw8VvDACX95h09inxx7amKP1hK0_kmww",
+  "1udJWQzhufKu_BC49sL22IlBg3_526kxR",
+  "1ObMgweXWLHJYFz3TfYaR1McwU0iAj2DV",
+  "15X_PtWKEY_Zmr8cOZP5mZE0gPlJsuaNC",
+  "1fx0WvyvtNO6f1rAnpdzVNxa-HrVMlywQ",
+  "1IKhHXdIES63iFyv4_mUSBwvMdx2ZECtF",
+  "15I9CO7APukGmD9GZtkOpCgxCXzNiwjPX",
+  "1f5t-_s6U9r4Y_H5c86C5OiS9wbJyoKxy",
+  "19DTPH_ovjEmiSpHkV1T_hud2boQOUJtK",
+  "18o5wfAIp3EBth5d7QO1KThQO71pHGGq6",
+  "1QcPQrQHOVmp7AaJ05-K2qmajL4Q56yv7",
+  "1nIwymC527tvIhMMwu0yVdaAOWk-kUtg6",
+  "1Nhp5gfcNBJVP70gSs0sD7PoIXBrqiBIo",
+  "1cU--HNem5OgpleRon0J2hf8prUE-BPBT",
+  "1IjbqUssgi8K143te98VAtn3P4GNdpDw4",
+  "1XQ6oXqqqUxEl0kzkSV-GIZxDAlBXNX02",
+  "1CMrxnmc2aVGzAOFvaqwca1G2xIMxFu3_",
+  "1xe8eupRf4GZXg7oxhTyEwPEitCI5tOrS",
+  "11A-AGXuIR4j2oVnLcoliknvGegABo1PG",
+  "1DCecgHSVdJwRc2Zx-WUtE55_cyfmy_3p",
+  "19OcCGUPRijT4XNErz2_clUOKUY7Vt4aL",
+  "11F7hcISjRgrunHHWT3XcaIwy4iamGFqp",
+  "1pCt70PQx54FtR8hytX7YHW1DsGcjcKNP",
+  "1JuGYaplNm6Gh-jGDxZaYfGOyK5BGQxnB",
+  "1UFFxxCYiLFob3b3Nm3X5wBH0u81sgKul",
+  "1w6fhzUEVDW9cRh-PSDg_SczSaP8CJSCI",
+];
+
+function getThumbUrl(id) {
+  return `https://lh3.googleusercontent.com/d/${id}=w800`;
+}
+
+function getFullUrl(id) {
+  return `https://lh3.googleusercontent.com/d/${id}=w1600`;
+}
+
+function renderPhotosFromArray() {
+  const grid = document.getElementById('gallery-grid');
+  const count = document.getElementById('photo-count');
+  photos = PHOTOS;
+  count.textContent = `${photos.length} photo${photos.length !== 1 ? 's' : ''}`;
+  grid.innerHTML = photos.map((id, i) => `
+    <div class="gallery-item" onclick="openLightbox(${i})">
+      <img src="${getThumbUrl(id)}" alt="Property photo ${i+1}" loading="lazy">
+      <div class="overlay"><span class="overlay-icon">⊕</span></div>
+    </div>
+  `).join('');
+}
+
+function openLightbox(index) {
+  currentIndex = index;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function lightboxNav(dir) {
+  currentIndex = (currentIndex + dir + photos.length) % photos.length;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  const id = photos[currentIndex];
+  document.getElementById('lightbox-img').src = getFullUrl(id);
+  document.getElementById('lightbox-counter').textContent = `${currentIndex + 1} / ${photos.length}`;
+  document.getElementById('lightbox-dl').href = `https://drive.google.com/uc?export=download&id=${id}`;
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+  if (e.key === 'Escape') closeLightbox();
+});
+
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+});
+
+renderPhotosFromArray();
+</script>
+</body>
+</html>
